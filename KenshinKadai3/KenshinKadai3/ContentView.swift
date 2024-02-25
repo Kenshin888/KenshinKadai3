@@ -70,7 +70,7 @@ struct ContentView: View {
                 outputs[1] = "\(rightnum * signR)"
 
             }
-
+            
             //テキスト
             HStack{
                 Spacer()
