@@ -8,25 +8,23 @@
 import SwiftUI
 
 struct ContentView: View {
-    @State var inputs: [String] = .init(repeating: "",count: 2)
-    @State var outputs: [String] = .init(repeating: "",count: 2)
+    @State var inputs: [String] = .init(repeating: "", count: 2)
+    @State var outputs: [String] = .init(repeating: "", count: 2)
     @State var inversL = false
     @State var inversR = false
-    @State var signL = 1
-    @State var signR = 1
     @State var ans = "値が入っていません"
     var body: some View {
-        VStack{
-            HStack{
+        VStack {
+            HStack {
                 CostomField(num: $inputs[0])
                 CostomField(num: $inputs[1])
             }
 
-            HStack{
+            HStack {
                 Spacer()
                 Text("+")
-                //トグルスイッチ
-                Toggle(isOn: $inversL){
+                // トグルスイッチ
+                Toggle(isOn: $inversL) {
                     Text("test")
                 }
                 .labelsHidden()
@@ -35,8 +33,8 @@ struct ContentView: View {
                 Spacer()
 
                 Text("+")
-                //トグルスイッチ
-                Toggle(isOn: $inversR){
+                // トグルスイッチ
+                Toggle(isOn: $inversR) {
                     Text("test")
                 }
                 .labelsHidden()
@@ -44,25 +42,25 @@ struct ContentView: View {
                 Spacer()
             }
 
-            //ボタン
-            Button("Button"){
-                guard let leftnum = Int(inputs[0]),let rightnum = Int(inputs[1]) else {
+            // ボタン
+            Button("Button") {
+                guard let leftnum = Int(inputs[0]), let rightnum = Int(inputs[1]) else {
                     ans = "値が入っていません"
                     return
                 }
-                //ここに計算式
-                switch inversL{
-                case false :
-                    signL = 1
-                default :
+
+                let signL: Int
+                if inversL {
                     signL = -1
+                } else {
+                    signL = 1
                 }
-                
-                switch inversR{
-                case false :
-                    signR = 1
-                default :
+
+                let signR: Int
+                if inversR {
                     signR = -1
+                } else {
+                    signR = 1
                 }
 
                 ans = "\(leftnum * signL + rightnum * signR)"
@@ -70,9 +68,9 @@ struct ContentView: View {
                 outputs[1] = "\(rightnum * signR)"
 
             }
-            
-            //テキスト
-            HStack{
+
+            // テキスト
+            HStack {
                 Spacer()
                 Text(outputs[0])
                     .frame(height: 50)
@@ -85,10 +83,9 @@ struct ContentView: View {
                 Spacer()
             }
 
-            //答え
+            // 答え
             Text(ans)
                 .padding()
-
 
         }
     }
